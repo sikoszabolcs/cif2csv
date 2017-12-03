@@ -123,14 +123,181 @@ namespace cif2csv
             return csvOutput.ToString();
         }
 
+        private const int TractionClassSize = 4;
+        private const int UicCodeSize = 5;
+        private const int AtocCodeSize = 2;
+        private const int ApplicableTimetableCodeSize = 1;
+        private const int BxReservedFieldSize1 = 8;
+        private const int BxReservedFieldSize2 = 1;
+        private const int BxSpareSize = 57;
+
         private static string ParseBasicScheduleExtraDetails(string record)
         {
-            return "BX";
+            var bxCsv = new StringBuilder(record.Length);
+            int index = 0;
+
+            bxCsv.Append(record.Substring(index, RecordIdentitySize));
+            index += RecordIdentitySize;
+            bxCsv.Append(",");
+
+            bxCsv.Append(record.Substring(index, TractionClassSize));
+            index += TractionClassSize;
+            bxCsv.Append(",");
+
+            bxCsv.Append(record.Substring(index, UicCodeSize));
+            index += UicCodeSize;
+            bxCsv.Append(",");
+
+            bxCsv.Append(record.Substring(index, AtocCodeSize));
+            index += AtocCodeSize;
+            bxCsv.Append(",");
+
+            bxCsv.Append(record.Substring(index, ApplicableTimetableCodeSize));
+            index += ApplicableTimetableCodeSize;
+            bxCsv.Append(",");
+
+            bxCsv.Append(record.Substring(index, BxReservedFieldSize1));
+            index += BxReservedFieldSize1;
+            bxCsv.Append(",");
+
+            bxCsv.Append(record.Substring(index, BxReservedFieldSize2));
+            index += BxReservedFieldSize2;
+            bxCsv.Append(",");
+
+            bxCsv.Append(record.Substring(index, BxSpareSize));
+
+            return bxCsv.ToString();
         }
+        private const int TransactionTypeSize = 1;
+        private const int TrainUidSize = 6;
+        private const int DateRunsFromSize = 6;
+        private const int DateRunsToSize = 6;
+        private const int DaysRunSize = 7;
+        private const int BankHolidayRunningSize = 1;
+        private const int TrainStatusSize = 1;
+        private const int TrainCategorySize = 2;
+        private const int TrainIdentitySize = 4;
+        private const int HeadcodeSize = 4;
+        private const int CourseIndicatorSize = 1;
+        private const int TrainServiceCodeSize = 8;
+        private const int PortionIdSize = 1;
+        private const int PowerTypeSize = 3;
+        private const int TimingLoadSize = 4;
+        private const int SpeedSize = 3;
+        private const int OperatingCharacteristicsSize = 6;
+        private const int SeatingClassSize = 1;
+        private const int SleepersSize = 1;
+        private const int ReservationsSize = 1;
+        private const int ConnectionIndicatorSize = 1;
+        private const int CateringCodeSize = 4;
+        private const int ServiceBrandingSize = 4;
+        private const int BsSpareSize = 1;
+        private const int StpIndicatorSize = 1;
 
         private static string ParseBasicSchedule(string record)
         {
-            return "BS";
+            var bsCsv = new StringBuilder(record.Length);
+            int index = 0;
+
+            bsCsv.Append(record.Substring(index, RecordIdentitySize));
+            index += RecordIdentitySize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, TransactionTypeSize));
+            index += TransactionTypeSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, TrainUidSize));
+            index += TrainUidSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, DateRunsFromSize));
+            index += DateRunsFromSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, DateRunsToSize));
+            index += DateRunsToSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, DaysRunSize));
+            index += DaysRunSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, BankHolidayRunningSize));
+            index += BankHolidayRunningSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, TrainStatusSize));
+            index += TrainStatusSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, TrainCategorySize));
+            index += TrainCategorySize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, TrainIdentitySize));
+            index += TrainIdentitySize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, HeadcodeSize));
+            index += HeadcodeSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, CourseIndicatorSize));
+            index += CourseIndicatorSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, TrainServiceCodeSize));
+            index += TrainServiceCodeSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, PortionIdSize));
+            index += PortionIdSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, PowerTypeSize));
+            index += PowerTypeSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, TimingLoadSize));
+            index += TimingLoadSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, SpeedSize));
+            index += SpeedSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, OperatingCharacteristicsSize));
+            index += OperatingCharacteristicsSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, SleepersSize));
+            index += SleepersSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, ReservationsSize));
+            index += ReservationsSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, ConnectionIndicatorSize));
+            index += ConnectionIndicatorSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, CateringCodeSize));
+            index += CateringCodeSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, ServiceBrandingSize));
+            index += ServiceBrandingSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, BsSpareSize));
+            index += BsSpareSize;
+            bsCsv.Append(",");
+
+            bsCsv.Append(record.Substring(index, StpIndicatorSize));
+
+            return bsCsv.ToString();
         }
 
         private static string ParseChangesEnRoute(string record)

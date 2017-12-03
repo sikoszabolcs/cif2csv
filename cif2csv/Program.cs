@@ -9,7 +9,7 @@ namespace cif2csv
     {
         static void Main(string[] args)
         {
-            if (args.Length != 4)
+            if (args.Length < 4)
             {
                 Usage();
                 return;
@@ -17,6 +17,7 @@ namespace cif2csv
 
             var inputFile = "";
             var outputFile = "";
+            var filter = "";
 
             foreach (var arg in args)
             {
@@ -28,12 +29,15 @@ namespace cif2csv
                     case "-csv":
                         outputFile = args[3];
                         break;
+                    case "-f":
+                        filter = args[5];
+                        break;
                 }
             }
 
             var sw = new Stopwatch();
             sw.Start();
-            ReadInput(inputFile, outputFile);
+            ReadInput(inputFile, outputFile, filter);
             sw.Stop();
 
             Console.Write("Done. Took {0}s", sw.Elapsed.Seconds);
@@ -43,7 +47,7 @@ namespace cif2csv
         private static StringBuilder _derbyTimetableCandidate = new StringBuilder();
         private static bool _keep = false;
 
-        private static string ParseRecord(string cifRecord)
+        private static string ParseRecord(string cifRecord, string filter)
         {
             var recordId = cifRecord.Substring(0, RecordIdentitySize);
 
@@ -58,7 +62,7 @@ namespace cif2csv
 
                     _derbyTimetableCandidate.Append(li);
 
-                    if (li.ToLower().Contains("drby"))
+                    if (li.ToLower().Contains(filter.ToLower()))
                     {
                         _keep = true;
                     }
@@ -70,7 +74,7 @@ namespace cif2csv
 
                     _derbyTimetableCandidate.Append(lo);
 
-                    if (lo.ToLower().Contains("drby"))
+                    if (lo.ToLower().Contains(filter.ToLower()))
                     {
                         _keep = true;
                     }
@@ -82,7 +86,7 @@ namespace cif2csv
 
                     _derbyTimetableCandidate.Append(lt);
 
-                    if (lt.ToLower().Contains("drby"))
+                    if (lt.ToLower().Contains(filter.ToLower()))
                     {
                         _keep = true;
                     }
@@ -495,7 +499,7 @@ namespace cif2csv
             return liCsv.ToString();
         }
 
-        private static void ReadInput(string inputFile, string outputFile)
+        private static void ReadInput(string inputFile, string outputFile, string filter)
         {
             // does file exist?
             if (File.Exists(inputFile))
@@ -506,7 +510,7 @@ namespace cif2csv
                     var input = "";
                     while ((input = inputStream.ReadLine()) != null)
                     {
-                        var csvLine = ParseRecord(input);
+                        var csvLine = ParseRecord(input, filter);
                         
                     }
                 }
@@ -525,7 +529,7 @@ namespace cif2csv
 
         static void Usage()
         {
-            Console.WriteLine("Usage: cif2csv -cif <filename> -csv <filename>");
+            Console.WriteLine("Usage: cif2csv -cif <filename> -csv <filename> [-f <filter>]");
         }
     }
 }

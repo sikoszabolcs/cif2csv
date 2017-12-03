@@ -43,8 +43,8 @@ namespace cif2csv
             Console.Write("Done. Took {0}s", sw.Elapsed.Seconds);
         }
 
-        private static StringBuilder _derbyTimetables = new StringBuilder();
-        private static StringBuilder _derbyTimetableCandidate = new StringBuilder();
+        private static StringBuilder _filteredSchedules = new StringBuilder();
+        private static StringBuilder _filteredScheduleCandidate = new StringBuilder();
         private static bool _keep = false;
 
         private static string ParseRecord(string cifRecord, string filter)
@@ -60,7 +60,7 @@ namespace cif2csv
                     string li = ParseIntermediateLocation(cifRecord);
                     csvOutput.Append(li);
 
-                    _derbyTimetableCandidate.Append(li);
+                    _filteredScheduleCandidate.Append(li);
 
                     if (li.ToLower().Contains(filter.ToLower()))
                     {
@@ -72,7 +72,7 @@ namespace cif2csv
                     string lo = ParseOriginLocation(cifRecord);
                     csvOutput.Append(lo);
 
-                    _derbyTimetableCandidate.Append(lo);
+                    _filteredScheduleCandidate.Append(lo);
 
                     if (lo.ToLower().Contains(filter.ToLower()))
                     {
@@ -84,7 +84,7 @@ namespace cif2csv
                     string lt = ParseTerminatingLocation(cifRecord);
                     csvOutput.Append(lt);
 
-                    _derbyTimetableCandidate.Append(lt);
+                    _filteredScheduleCandidate.Append(lt);
 
                     if (lt.ToLower().Contains(filter.ToLower()))
                     {
@@ -95,7 +95,7 @@ namespace cif2csv
                 case "CR":
                     string cr = ParseChangesEnRoute(cifRecord);
                     csvOutput.Append(cr);
-                    _derbyTimetableCandidate.Append(cr);
+                    _filteredScheduleCandidate.Append(cr);
                     break;
                 case "BS":
                     string bs = ParseBasicSchedule(cifRecord);
@@ -103,18 +103,18 @@ namespace cif2csv
 
                     if (_keep)
                     {
-                        _derbyTimetables.Append(_derbyTimetableCandidate);
+                        _filteredSchedules.Append(_filteredScheduleCandidate);
                         _keep = false;
                     }
 
-                    _derbyTimetableCandidate = new StringBuilder(cifRecord.Length);
-                    _derbyTimetableCandidate.Append(bs);
+                    _filteredScheduleCandidate = new StringBuilder(cifRecord.Length);
+                    _filteredScheduleCandidate.Append(bs);
                     break;
                 case "BX":
                     string bx = ParseBasicScheduleExtraDetails(cifRecord);
                     csvOutput.Append(bx);
 
-                    _derbyTimetableCandidate.Append(bx);
+                    _filteredScheduleCandidate.Append(bx);
                     break;
                 default:
                     csvOutput.Append("ERROR! Unknown Record Identifier: ");
@@ -122,7 +122,7 @@ namespace cif2csv
                     break;
             }
             csvOutput.AppendLine();
-            _derbyTimetableCandidate.AppendLine();
+            _filteredScheduleCandidate.AppendLine();
 
             return csvOutput.ToString();
         }
@@ -517,7 +517,7 @@ namespace cif2csv
 
                 using (var outputStream = new StreamWriter(outputFile, false, Encoding.UTF8))
                 {
-                    outputStream.WriteLine(_derbyTimetables.ToString());
+                    outputStream.WriteLine(_filteredSchedules.ToString());
                 }
                 
             }

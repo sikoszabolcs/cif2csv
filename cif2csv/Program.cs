@@ -35,19 +35,22 @@ namespace cif2csv
                 }
             }
 
-            var sw = new Stopwatch();
-            sw.Start();
-            ReadInput(inputFile, outputFile, filter);
-            sw.Stop();
+            MemoryMapped mm = new MemoryMapped(inputFile, outputFile);
+            mm.Convert();
 
-            Console.Write("Done. Took {0}s", sw.Elapsed.Seconds);
+            //var sw = new Stopwatch();
+            //sw.Start();
+            //ReadInput(inputFile, outputFile, filter);
+            //sw.Stop();
+
+            //Console.Write("Done. Took {0}s", sw.Elapsed.Seconds);
         }
 
         private static StringBuilder _filteredSchedules = new StringBuilder();
         private static StringBuilder _filteredScheduleCandidate = new StringBuilder();
         private static bool _keep = false;
 
-        private static string ParseRecord(string cifRecord, string filter)
+        public static string ParseRecord(string cifRecord, string filter)
         {
             var recordId = cifRecord.Substring(0, RecordIdentitySize);
 

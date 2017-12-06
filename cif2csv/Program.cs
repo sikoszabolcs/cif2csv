@@ -116,6 +116,27 @@ namespace cif2csv
 
                     _filteredScheduleCandidate.Append(bx);
                     break;
+                case "TN": // Train Specific Note
+                    // TODO
+                    break;
+                case "LN": // Location Specific Note
+                    // TODO
+                    break;
+                case "AA": // Assotiations
+                    // TODO
+                    break;
+                case "TI": // Tiploc Insert
+                    // TODO
+                    break;
+                case "TA": // Tiploc Amend
+                    // TODO
+                    break;
+                case "TD": // Tiploc Delete
+                    // TODO
+                    break;
+                case "ZZ": // Trailer Record
+                    // TODO
+                    break;
                 default:
                     csvOutput.Append("ERROR! Unknown Record Identifier: ");
                     csvOutput.Append(recordId);
@@ -306,8 +327,100 @@ namespace cif2csv
 
         private static string ParseChangesEnRoute(string record)
         {
-            return "CR";
+            var crCsv = new StringBuilder(record.Length);
+            int index = 0;
+
+            crCsv.Append(record.Substring(index, RecordIdentitySize));
+            index += RecordIdentitySize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, LocationSize));
+            index += LocationSize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, TrainCategorySize));
+            index += TrainCategorySize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, TrainIdentitySize));
+            index += TrainIdentitySize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, HeadcodeSize));
+            index += HeadcodeSize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, CourseIndicatorSize));
+            index += CourseIndicatorSize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, TrainServiceCodeSize));
+            index += TrainServiceCodeSize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, PortionIdSize));
+            index += PortionIdSize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, PowerTypeSize));
+            index += PowerTypeSize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, TimingLoadSize));
+            index += TimingLoadSize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, SpeedSize));
+            index += SpeedSize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, OperatingCharacteristicsSize));
+            index += OperatingCharacteristicsSize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, SeatingClassSize));
+            index += SeatingClassSize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, SleepersSize));
+            index += SleepersSize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, ReservationsSize));
+            index += ReservationsSize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, ConnectionIndicatorSize));
+            index += ConnectionIndicatorSize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, CateringCodeSize));
+            index += CateringCodeSize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, ServiceBrandingSize));
+            index += ServiceBrandingSize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, TractionClassSize));
+            index += TractionClassSize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, UicCodeSize));
+            index += UicCodeSize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, CrReservedFieldSize));
+            index += CrReservedFieldSize;
+            crCsv.Append(",");
+
+            crCsv.Append(record.Substring(index, CrSpareSize));
+
+            return crCsv.ToString();
         }
+
+        private const int CrReservedFieldSize = 8;
+        private const int CrSpareSize = 5;
 
         private const int ScheduledArrivalSize = 5;
         private const int PublicArrivalSize = 4;

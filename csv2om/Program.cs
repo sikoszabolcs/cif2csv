@@ -24,8 +24,6 @@ namespace csv2om
                     if (item is BasicSchedule)
                     {
                         derby.Add(item);
-                        Console.WriteLine("-----------------------");
-                        Console.WriteLine(item.ToString());
                         prev = null;
                     }
 
@@ -40,13 +38,10 @@ namespace csv2om
                                 if (plr != null && !plr.Location.Contains("DRBY"))
                                 {
                                     derby.Add(plr);
-                                    Console.WriteLine("{0}", plr.ToString());
                                 }
                             }
 
                             derby.Add(lo);
-                            Console.WriteLine("{0}",
-                               item.ToString());
                         }
                         else
                         {
@@ -56,13 +51,17 @@ namespace csv2om
                                 if (plr != null && plr.Location.Contains("DRBY"))
                                 {
                                     derby.Add(item);
-                                    Console.WriteLine("{0}", item.ToString());
                                 }
                             }
                         }
                         prev = item;
                     }
                 }
+            }
+
+            foreach (var item in derby)
+            {
+                Console.WriteLine(item.ToString());
             }
         }
         

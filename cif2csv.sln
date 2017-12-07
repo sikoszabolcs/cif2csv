@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2010
+VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cif2csv", "cif2csv\cif2csv.csproj", "{AE5E5011-42E3-4BEC-A3FF-2B1DE5F4944F}"
 EndProject
@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{82B1887B-E
 	ProjectSection(SolutionItems) = preProject
 		UkTiplocCoordinates.csv = UkTiplocCoordinates.csv
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csv2om", "csv2om\csv2om.csproj", "{2AE3F61E-89DF-4C1C-A857-88C9E5537457}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +22,10 @@ Global
 		{AE5E5011-42E3-4BEC-A3FF-2B1DE5F4944F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE5E5011-42E3-4BEC-A3FF-2B1DE5F4944F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE5E5011-42E3-4BEC-A3FF-2B1DE5F4944F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AE3F61E-89DF-4C1C-A857-88C9E5537457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AE3F61E-89DF-4C1C-A857-88C9E5537457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AE3F61E-89DF-4C1C-A857-88C9E5537457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AE3F61E-89DF-4C1C-A857-88C9E5537457}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

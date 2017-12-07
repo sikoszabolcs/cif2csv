@@ -296,6 +296,10 @@ namespace cif2csv
             index += OperatingCharacteristicsSize;
             bsCsv.Append(",");
 
+            bsCsv.Append(record.Substring(index, SeatingClassSize));
+            index += SeatingClassSize;
+            bsCsv.Append(",");
+
             bsCsv.Append(record.Substring(index, SleepersSize));
             index += SleepersSize;
             bsCsv.Append(",");
